@@ -1,3 +1,4 @@
+'use client';
 /**
  * v0 by Vercel.
  * @see https://v0.dev/t/SecCB6xsG74
@@ -6,68 +7,42 @@
 import Link from 'next/link';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { ConnectKitButton } from 'connectkit';
 
 export default function HomePage() {
   return (
     <div className="flex min-h-[100dvh] flex-col">
       <header className="flex h-14 items-center px-4 lg:px-6">
         <Link href="#" className="flex items-center justify-center" prefetch={false}>
-          <GamepadIcon className="text-primary h-6 w-6" />
-          <span className="text-primary text-xl font-bold">Gam3Box</span>
+          <GamepadIcon className="h-6 w-6 text-primary" />
+          <span className="text-xl font-bold text-primary">Gam3Box</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link
-            href="#"
-            className="text-primary-foreground text-sm font-medium underline-offset-4 hover:underline"
-            prefetch={false}
-          >
-            Games
-          </Link>
-          <Link
-            href="#"
-            className="text-primary-foreground text-sm font-medium underline-offset-4 hover:underline"
-            prefetch={false}
-          >
-            Events
-          </Link>
-          <Link
-            href="#"
-            className="text-primary-foreground text-sm font-medium underline-offset-4 hover:underline"
-            prefetch={false}
-          >
-            Earn
-          </Link>
-          <Link
-            href="#"
-            className="text-primary-foreground text-sm font-medium underline-offset-4 hover:underline"
-            prefetch={false}
-          >
-            About
-          </Link>
+          <ConnectKitButton />
         </nav>
       </header>
       <main className="flex-1">
-        <section className="bg-primary w-full py-12 md:py-24 lg:py-32">
+        <section className="w-full bg-primary py-12 md:py-24 lg:py-32">
           <div className="container grid grid-cols-1 items-center gap-8 px-4 md:grid-cols-2 md:px-6">
             <div className="space-y-4">
-              <h1 className="text-primary-foreground text-4xl font-bold md:text-5xl">
+              <h1 className="text-4xl font-bold text-primary-foreground md:text-5xl">
                 Unlock the Future of Gaming
               </h1>
-              <p className="text-primary-foreground text-lg">
+              <p className="text-lg text-primary-foreground">
                 Gam3Box is a platform that empowers you to host events, play games, and earn
                 community tokens. Join the revolution in play-to-earn gaming.
               </p>
               <div className="flex gap-4">
                 <Link
                   href="#"
-                  className="bg-primary-foreground text-primary hover:bg-primary/90 focus-visible:ring-ring inline-flex h-10 items-center justify-center rounded-md px-6 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
+                  className="inline-flex h-10 items-center justify-center rounded-md bg-primary-foreground px-6 text-sm font-medium text-primary shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >
                   Start Playing
                 </Link>
                 <Link
                   href="#"
-                  className="border-primary-foreground bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring inline-flex h-10 items-center justify-center rounded-md border px-6 text-sm font-medium shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
+                  className="inline-flex h-10 items-center justify-center rounded-md border border-primary-foreground bg-primary px-6 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >
                   Host an Event
@@ -83,14 +58,14 @@ export default function HomePage() {
             />
           </div>
         </section>
-        <section className="bg-muted w-full py-12 md:py-24 lg:py-32">
+        <section className="w-full bg-muted py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
                   Explore Game Categories
                 </h2>
-                <p className="text-muted-foreground max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Discover a wide range of games across different genres and gameplay styles.
                 </p>
               </div>
@@ -98,57 +73,57 @@ export default function HomePage() {
             <div className="mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3">
               <Link
                 href="#"
-                className="bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group grid gap-1 rounded-lg p-4"
+                className="group grid gap-1 rounded-lg bg-background p-4 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                 prefetch={false}
               >
-                <PuzzleIcon className="text-primary h-8 w-8" />
+                <PuzzleIcon className="h-8 w-8 text-primary" />
                 <h3 className="text-lg font-bold">Puzzle</h3>
-                <p className="text-muted-foreground text-sm">Test your problem-solving skills.</p>
+                <p className="text-sm text-muted-foreground">Test your problem-solving skills.</p>
               </Link>
               <Link
                 href="#"
-                className="bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group grid gap-1 rounded-lg p-4"
+                className="group grid gap-1 rounded-lg bg-background p-4 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                 prefetch={false}
               >
-                <ArchiveIcon className="text-primary h-8 w-8" />
+                <ArchiveIcon className="h-8 w-8 text-primary" />
                 <h3 className="text-lg font-bold">Arcade</h3>
-                <p className="text-muted-foreground text-sm">Classic arcade-style games.</p>
+                <p className="text-sm text-muted-foreground">Classic arcade-style games.</p>
               </Link>
               <Link
                 href="#"
-                className="bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group grid gap-1 rounded-lg p-4"
+                className="group grid gap-1 rounded-lg bg-background p-4 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                 prefetch={false}
               >
-                <KeyIcon className="text-primary h-8 w-8" />
+                <KeyIcon className="h-8 w-8 text-primary" />
                 <h3 className="text-lg font-bold">Strategy</h3>
-                <p className="text-muted-foreground text-sm">Outsmart your opponents.</p>
+                <p className="text-sm text-muted-foreground">Outsmart your opponents.</p>
               </Link>
               <Link
                 href="#"
-                className="bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group grid gap-1 rounded-lg p-4"
+                className="group grid gap-1 rounded-lg bg-background p-4 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                 prefetch={false}
               >
-                <ClubIcon className="text-primary h-8 w-8" />
+                <ClubIcon className="h-8 w-8 text-primary" />
                 <h3 className="text-lg font-bold">Sports</h3>
-                <p className="text-muted-foreground text-sm">Compete in virtual sports.</p>
+                <p className="text-sm text-muted-foreground">Compete in virtual sports.</p>
               </Link>
               <Link
                 href="#"
-                className="bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group grid gap-1 rounded-lg p-4"
+                className="group grid gap-1 rounded-lg bg-background p-4 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                 prefetch={false}
               >
-                <ActivityIcon className="text-primary h-8 w-8" />
+                <ActivityIcon className="h-8 w-8 text-primary" />
                 <h3 className="text-lg font-bold">Adventure</h3>
-                <p className="text-muted-foreground text-sm">Embark on thrilling journeys.</p>
+                <p className="text-sm text-muted-foreground">Embark on thrilling journeys.</p>
               </Link>
               <Link
                 href="#"
-                className="bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group grid gap-1 rounded-lg p-4"
+                className="group grid gap-1 rounded-lg bg-background p-4 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                 prefetch={false}
               >
-                <ServerIcon className="text-primary h-8 w-8" />
+                <ServerIcon className="h-8 w-8 text-primary" />
                 <h3 className="text-lg font-bold">Multiplayer</h3>
-                <p className="text-muted-foreground text-sm">Compete or collaborate with others.</p>
+                <p className="text-sm text-muted-foreground">Compete or collaborate with others.</p>
               </Link>
             </div>
           </div>
@@ -158,7 +133,7 @@ export default function HomePage() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Featured Games</h2>
-                <p className="text-muted-foreground max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Check out some of the most popular and engaging games on Gam3Box.
                 </p>
               </div>
@@ -181,7 +156,7 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center justify-between">
                     <Button variant="link">Play Now</Button>
-                    <div className="text-primary flex items-center gap-1">
+                    <div className="flex items-center gap-1 text-primary">
                       <CoinsIcon className="h-5 w-5" />
                       <span>250 GBX</span>
                     </div>
@@ -205,7 +180,7 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center justify-between">
                     <Button variant="link">Play Now</Button>
-                    <div className="text-primary flex items-center gap-1">
+                    <div className="flex items-center gap-1 text-primary">
                       <CoinsIcon className="h-5 w-5" />
                       <span>150 GBX</span>
                     </div>
@@ -229,7 +204,7 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center justify-between">
                     <Button variant="link">Play Now</Button>
-                    <div className="text-primary flex items-center gap-1">
+                    <div className="flex items-center gap-1 text-primary">
                       <CoinsIcon className="h-5 w-5" />
                       <span>300 GBX</span>
                     </div>
@@ -239,26 +214,26 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        <section className="bg-muted w-full py-12 md:py-24 lg:py-32">
+        <section className="w-full bg-muted py-12 md:py-24 lg:py-32">
           <div className="container grid grid-cols-1 items-center gap-8 px-4 md:grid-cols-2 md:px-6">
             <div className="space-y-4">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
                 Join the Gam3Box Community
               </h2>
-              <p className="text-muted-foreground max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Sign up now to start playing, hosting events, and earning community tokens.
               </p>
               <div className="flex gap-4">
                 <Link
                   href="#"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring inline-flex h-10 items-center justify-center rounded-md px-6 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
+                  className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >
                   Sign Up
                 </Link>
                 <Link
                   href="#"
-                  className="border-primary bg-muted text-primary hover:bg-primary/90 focus-visible:ring-ring inline-flex h-10 items-center justify-center rounded-md border px-6 text-sm font-medium shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
+                  className="inline-flex h-10 items-center justify-center rounded-md border border-primary bg-muted px-6 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >
                   Start Playing
@@ -275,10 +250,10 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-      <footer className="bg-muted w-full p-6 md:py-12">
+      <footer className="w-full bg-muted p-6 md:py-12">
         <div className="container grid max-w-7xl grid-cols-2 gap-8 text-sm sm:grid-cols-3 md:grid-cols-5">
           <div className="grid gap-1">
-            <h3 className="text-primary font-semibold">Gam3Box</h3>
+            <h3 className="font-semibold text-primary">Gam3Box</h3>
             <Link href="#" className="text-primary-foreground hover:underline" prefetch={false}>
               About
             </Link>
@@ -293,7 +268,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid gap-1">
-            <h3 className="text-primary font-semibold">Community</h3>
+            <h3 className="font-semibold text-primary">Community</h3>
             <Link href="#" className="text-primary-foreground hover:underline" prefetch={false}>
               Discord
             </Link>
@@ -308,7 +283,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid gap-1">
-            <h3 className="text-primary font-semibold">Support</h3>
+            <h3 className="font-semibold text-primary">Support</h3>
             <Link href="#" className="text-primary-foreground hover:underline" prefetch={false}>
               Help Center
             </Link>
@@ -323,8 +298,8 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid gap-1">
-            <h3 className="text-primary font-semibold">Legal</h3>
-            <Link href="#" className="text-primary-foreground hover:" prefetch={false} />
+            <h3 className="font-semibold text-primary">Legal</h3>
+            <Link href="#" className="hover: text-primary-foreground" prefetch={false} />
           </div>
         </div>
       </footer>
