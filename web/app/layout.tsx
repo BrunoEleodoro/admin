@@ -1,4 +1,4 @@
-import './global.css';
+import './globals.css';
 
 import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics';
 import OnchainProviders from '@/OnchainProviders';
