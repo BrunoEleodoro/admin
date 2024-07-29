@@ -1,8 +1,6 @@
-@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/
-@solady/=lib/solady/
-@ERC721A/=lib/ERC721A/
-@murky/=lib/murky/
-ds-test/=lib/forge-std/lib/ds-test/src/
-erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/
 forge-std/=lib/forge-std/src/
-openzeppelin-contracts/=lib/openzeppelin-contracts/
+@superfluid/=lib/protocol-monorepo/packages/ethereum-contracts/contracts
+@superfluid-finance/=lib/protocol-monorepo/packages
+@supertokens/=lib/custom-supertokens/contracts
+@openzeppelin/=lib/openzeppelin-contracts
+@openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts
