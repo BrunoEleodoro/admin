@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rm -rf .next && next build",
     "check": "yarn format && yarn lint && yarn stylelint",
-    "dev": "next dev",
+    "dev": "next dev -p 3333",
     "format": "prettier --log-level warn --write .",
     "format:check": "prettier --check .",
     "lint": "next lint --fix",
@@ -18,6 +18,7 @@
     "test:coverage:open": "yarn test:coverage && open coverage/lcov-report/index.html"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.620.1",
     "@coinbase/onchainkit": "^0.19.7",
     "@coinbase/wallet-sdk": "4.0.0",
     "@emotion/react": "^11.13.0",
