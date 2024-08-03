@@ -2,6 +2,6 @@
 include .env
 
 local-node:
-	anvil --chain-id 84532
+	anvil --fork-url https://mainnet.base.org --chain-id 84532
 
 .PHONY: local-node

@@ -5,15 +5,14 @@ import {IGame, GameCurrency} from "./IGame.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {ISuperToken} from "@superfluid/interfaces/superfluid/ISuperToken.sol";
 import {SuperTokenV1Library} from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
-import {AccessControlUpgradeable} from "@openzeppelin-contracts-upgradeable/access/AccessControlUpgradeable.sol";
-import {UUPSUpgradeable} from "@openzeppelin-contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 
 /**
  * @title Game contract
  * @dev Game contract that allows players to enter the game and start streaming $LIFE tokens.
  * The game admin can eat the flow of a player and exit the game.
  */
-contract Game is IGame, AccessControlUpgradeable, UUPSUpgradeable {
+contract Game is IGame, AccessControl {
     using SuperTokenV1Library for ISuperToken;
 
     /**
@@ -46,17 +45,12 @@ contract Game is IGame, AccessControlUpgradeable, UUPSUpgradeable {
      */
     mapping(address => GameCurrency) public gameCurrencies;
 
-    constructor() {}
-
-    function initialize(
+    constructor(
         address _lifePool,
         ISuperToken _life,
         int96 _baseFlowRate,
         uint256 nativePrice
-    ) public initializer {
-        __AccessControl_init();
-        __UUPSUpgradeable_init();
-
+    ) {
         life = _life;
         lifePool = _lifePool;
         BASE_FLOW_RATE = _baseFlowRate;
@@ -177,8 +171,4 @@ contract Game is IGame, AccessControlUpgradeable, UUPSUpgradeable {
         (, int96 flowRate, , ) = life.getFlowInfo(lifePool, player);
         return flowRate > 0;
     }
-
-    function _authorizeUpgrade(
-        address
-    ) internal override onlyRole(DEFAULT_ADMIN_ROLE) {}
 }

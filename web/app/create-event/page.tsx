@@ -12,8 +12,11 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeftIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
 import { useState } from 'react';
+import useCreateGameFactory from '@/hooks/useCreateGameFactory';
+import { useAccount } from 'wagmi';
 
 export default function Component() {
+  const { address: adminAddress } = useAccount();
   const [food1Image, setFood1Image] = useState('');
   const [food2Image, setFood2Image] = useState('');
   const [food3Image, setFood3Image] = useState('');
@@ -26,6 +29,26 @@ export default function Component() {
   const [tokensPerSecond, setTokensPerSecond] = useState('');
   const [maxPlayers, setMaxPlayers] = useState('');
   const [serverLocation, setServerLocation] = useState('');
+
+  const {
+    disabled,
+    transactionState,
+    resetContractForms,
+    onSubmitTransaction,
+    errors,
+    dataHash,
+    transactionReceiptStatus,
+    newGameContract,
+  } = useCreateGameFactory({
+    arguments: [
+      adminAddress as `0x${string}`,
+      '0xD04383398dD2426297da660F9CCA3d439AF9ce1b',
+      (1e16).toString(),
+      '1000000000',
+    ],
+  });
+
+  console.log({ transactionState, transactionReceiptStatus, errors, dataHash });
 
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -84,7 +107,7 @@ export default function Component() {
         body: JSON.stringify({
           event,
           // TODO: change this once we deploy the contract using this interface
-          contractAddress: '0x1234567890123456789012345678901234567890',
+          contractAddress: newGameContract,
         }),
       });
 
@@ -111,6 +134,9 @@ export default function Component() {
         <ArrowLeftIcon className="mr-2 h-4 w-4" /> Back to Home
       </Link>
       <br />
+      <button type="button" onClick={onSubmitTransaction}>
+        TEsttgdsagf
+      </button>
       <br />
       <form
         onSubmit={handleSubmit}
@@ -291,6 +317,9 @@ export default function Component() {
                 />
               </div>
               <div className="mt-1" />
+              {newGameContract && <div className="text-sm text-muted-foreground">
+                {newGameContract}
+              </div>}
             </div>
           </div>
           <div>
