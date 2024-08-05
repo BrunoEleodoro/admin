@@ -1,6 +1,6 @@
 import { getDefaultConfig } from 'connectkit';
 import { createConfig, http } from 'wagmi';
-import { base, baseSepolia, localhost } from 'wagmi/chains';
+import { base, baseSepolia, localhost, sepolia } from 'wagmi/chains';
 import { coinbaseWallet, walletConnect } from 'wagmi/connectors';
 
 export function createWagmiConfig(rpcUrl: string, projectId?: string) {
@@ -17,7 +17,7 @@ export function createWagmiConfig(rpcUrl: string, projectId?: string) {
   return createConfig(
     getDefaultConfig({
       appName: 'Gam3Box',
-      chains: [ base, foundry],
+      chains: [sepolia,base, foundry],
       walletConnectProjectId: projectId || '',
       coinbaseWalletPreference: 'smartWalletOnly',
       ssr: true,

@@ -45,15 +45,37 @@ contract Game is IGame, AccessControl {
      */
     mapping(address => GameCurrency) public gameCurrencies;
 
+    /**
+     * @dev Game start time
+     */
+    uint256 public startTime;
+
+    /**
+     * @dev Game duration
+     */
+    uint256 public duration;
+
+    /**
+     * @dev Modifier to check if the game is active
+     */
+    modifier gameActive() {
+        require(block.timestamp >= startTime, "Game has not started yet");
+    require(block.timestamp < startTime + duration, "Game has ended");
+    _;
+}
     constructor(
         address _lifePool,
         ISuperToken _life,
         int96 _baseFlowRate,
-        uint256 nativePrice
+        uint256 nativePrice,
+        uint256 _startTime,
+        uint256 _duration
     ) {
         life = _life;
         lifePool = _lifePool;
         BASE_FLOW_RATE = _baseFlowRate;
+        startTime = _startTime;
+        duration = _duration;
         // Enable native currency
         gameCurrencies[address(0)].enabled = true;
         gameCurrencies[address(0)].price = nativePrice;
@@ -69,7 +91,7 @@ contract Game is IGame, AccessControl {
         address player,
         address currency,
         bytes memory userData
-    ) external payable override {
+    ) external payable override gameActive {
         require(!_isInGame(player), "Game: player already in game");
 
         // Pay to enter the game
@@ -92,7 +114,7 @@ contract Game is IGame, AccessControl {
         address playerEaten,
         // Percentage of the flow rate to be eaten based on MAX_BPS
         uint256 percentageEaten
-    ) external override onlyRole(GAME_ADMIN_ROLE) {
+    ) external override onlyRole(GAME_ADMIN_ROLE) gameActive {
         require(
             _isInGame(playerEating) && _isInGame(playerEaten),
             "Game: players not in game"
@@ -132,7 +154,7 @@ contract Game is IGame, AccessControl {
      * @notice Admin function to exit a player from the game
      * @param player Player exiting the game
      */
-    function exit(address player) external override onlyRole(GAME_ADMIN_ROLE) {
+    function exit(address player) external override onlyRole(GAME_ADMIN_ROLE) gameActive {
         require(_isInGame(player), "Game: player not in game");
         // Exit the game (delete the flow)
         life.deleteFlowFrom(lifePool, player);
@@ -143,7 +165,7 @@ contract Game is IGame, AccessControl {
     function updateGamePrice(
         address currency,
         uint256 price
-    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) gameActive {
         gameCurrencies[currency].price = price;
     }
 
@@ -153,7 +175,7 @@ contract Game is IGame, AccessControl {
 
     // Internal methods
 
-    function _handlePayments(address from, address currency) internal {
+    function _handlePayments(address from, address currency) internal gameActive {
         require(gameCurrencies[currency].enabled, "Game: currency not enabled");
 
         // Payment validation

@@ -6,8 +6,7 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from 'wagmi';
-import GameFactoryABI from '@/abis/GameFactory.json'; // Make sure to create this ABI file
-import { GAME_FACTORY_ADDRESS } from '@/constants';
+import SuperTokenABI from '@/abis/ISuperToken.json'; // Make sure to create this ABI file
 
 export enum TransactionStates {
   START,
@@ -16,9 +15,11 @@ export enum TransactionStates {
 }
 
 export default function useCreateGameFactory({
+  tokenAddress,
   arguments: args,
 }: {
-  arguments: [string, string, string, string, string, string, string]; // [admin, superToken, baseFlowRate, nativePrice, startTime, duration]
+  tokenAddress: string;
+  arguments: [string]; // [admin, superToken, baseFlowRate, nativePrice, startTime, duration]
 }) {
   const [newGameContract, setNewGameContract] = useState<string | null>(null);
   const [transactionState, setTransactionState] = useState<TransactionStates | null>(null);
@@ -30,13 +31,11 @@ export default function useCreateGameFactory({
     isLoading,
   } = useSimulateContract({
     account: address,
-    address: GAME_FACTORY_ADDRESS,
-    abi: GameFactoryABI.abi,
-    functionName: 'createGame',
+    address: tokenAddress as `0x${string}`,
+    abi: SuperTokenABI.abi,
+    functionName: 'approve',
     args,
   });
-
-  console.log('contractRequest', contractRequest, error, args);
 
   const {
     writeContract,
@@ -55,7 +54,6 @@ export default function useCreateGameFactory({
   const disabled = writeContractStatus === 'pending';
 
   const onSubmitTransaction = useCallback(() => {
-    console.log('onSubmitTransaction', contractRequest);
     const request = contractRequest?.request;
     if (request) {
       const res = writeContract(contractRequest?.request);
