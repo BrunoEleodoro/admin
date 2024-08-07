@@ -109,6 +109,17 @@ export default function Component() {
     functionName: 'balanceOf',
     args: [adminAddress as `0x${string}`],
   });
+  const { data: allowance } = useReadContract({
+    address: tokenAddress as `0x${string}`,
+    abi: ISuperToken.abi,
+    functionName: 'allowance',
+    args: [adminAddress as `0x${string}`, GAME_FACTORY_ADDRESS],
+    query: {
+      refetchInterval: 10000,
+    },
+  });
+  const allowanceAmount = allowance ? parseFloat(formatEther(allowance as bigint)) : 0;
+  const shouldApprove = allowanceAmount < tokenAmountNeeded;
 
   const tokensAvailable = superTokenBalance?.data;
 
@@ -660,20 +671,22 @@ export default function Component() {
           </Button>
         </div>
         <div className="flex justify-end gap-4">
-          <Button
-            className="rounded-md px-6 py-2"
-            onClick={(e) => {
-              e.preventDefault();
-              approve({
-                address: tokenAddress as `0x${string}`,
-                abi: ISuperToken.abi,
-                functionName: 'approve',
-                args: [GAME_FACTORY_ADDRESS, parseEther('1000000000000000000000000')],
-              });
-            }}
-          >
-            Approve Super Token for event creation
-          </Button>
+          {shouldApprove && (
+            <Button
+              className="rounded-md px-6 py-2"
+              onClick={(e) => {
+                e.preventDefault();
+                approve({
+                  address: tokenAddress as `0x${string}`,
+                  abi: ISuperToken.abi,
+                  functionName: 'approve',
+                  args: [GAME_FACTORY_ADDRESS, parseEther('1000000000000000000000000')],
+                });
+              }}
+            >
+              Approve Super Token for event creation
+            </Button>
+          )}
           <Button
             className="rounded-md px-6 py-2"
             onClick={(e) => {
