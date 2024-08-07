@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ArrowLeftIcon, PlayIcon } from '@radix-ui/react-icons';
+import { useCreatedGames } from '@/hooks/useCreatedGames';
 
 const blink = keyframes`
   0%, 100% { opacity: 1; }
@@ -25,6 +26,7 @@ const BlinkingBadge = styled(Badge)`
 `;
 
 export default function ListGames() {
+  const { games, isLoading } = useCreatedGames();
   return (
     <div className="mx-auto w-full max-w-5xl p-6 md:p-10">
       <Link
@@ -33,7 +35,7 @@ export default function ListGames() {
       >
         <ArrowLeftIcon className="mr-2 h-4 w-4" /> Back to Home
       </Link>
-      <div className="mb-6 flex items-center justify-between mt-4">
+      <div className="mb-6 mt-4 flex items-center justify-between">
         <h1 className="text-2xl font-bold">Available Games To Play</h1>
       </div>
       <div className="overflow-hidden rounded-lg border">
@@ -50,29 +52,44 @@ export default function ListGames() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell className="font-medium">Galactic Showdown</TableCell>
-              <TableCell>1,234</TableCell>
-              <TableCell>2023-07-01</TableCell>
-              <TableCell>2 hours</TableCell>
-              <TableCell>0.5 GALA</TableCell>
-              <TableCell>
-                <BlinkingBadge variant="outline" className="bg-green-500 text-white">
-                  Live
-                </BlinkingBadge>
-              </TableCell>
-              <TableCell>
-                <div className="flex space-x-2">
-                  <Button variant="outline" size="sm">
-                    <PlayIcon className="mr-2 h-4 w-4" /> Play
-                  </Button>
-                  <Button variant="outline" size="sm">
-                    Spectate
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-            <TableRow>
+            {isLoading ? (
+              <TableRow>
+                <TableCell>Loading...</TableCell>
+              </TableRow>
+            ) : (
+              games.map((game) => {
+                const eventStartTime = parseFloat(game.metadata.event.startTime);
+                const startTime = new Date(eventStartTime * 1000).toLocaleString();
+                const isLive = new Date().getTime() < eventStartTime;
+                return (
+                  <TableRow key={game.gameAddress}>
+                    <TableCell className="font-medium">{game.metadata.event.name}</TableCell>
+                    <TableCell>22</TableCell>
+                    <TableCell>
+                      {startTime}
+                    </TableCell>
+                    <TableCell>{game.metadata.event.duration} hours</TableCell>
+                    <TableCell>{game.metadata.event.settings.tokensPerSecond} Tokens</TableCell>
+                    <TableCell>
+                      <BlinkingBadge variant="outline" className="bg-green-500 text-white">
+                        {isLive ? 'Live' : 'Upcoming'}
+                      </BlinkingBadge>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex space-x-2">
+                        <Button variant="outline" size="sm">
+                          <PlayIcon className="mr-2 h-4 w-4" /> Play
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          Spectate
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })
+            )}
+            {/* <TableRow>
               <TableCell className="font-medium">Cosmic Clash</TableCell>
               <TableCell>789</TableCell>
               <TableCell>2023-06-15</TableCell>
@@ -88,7 +105,7 @@ export default function ListGames() {
                   Spectate
                 </Button>
               </TableCell>
-            </TableRow>
+            </TableRow> 
             <TableRow>
               <TableCell className="font-medium">Stellar Showdown</TableCell>
               <TableCell>456</TableCell>
@@ -127,7 +144,7 @@ export default function ListGames() {
                   </Button>
                 </div>
               </TableCell>
-            </TableRow>
+            </TableRow> */}
           </TableBody>
         </Table>
       </div>

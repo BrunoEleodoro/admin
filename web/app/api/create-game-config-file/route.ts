@@ -21,6 +21,8 @@ export async function POST(req: Request) {
 
     const gameConfig = {
       event: {
+        startTime: event.startTime || '',
+        endTime: event.endTime || '',
         name: event.name || '',
         duration: event.duration || '',
         game: event.game || '',
