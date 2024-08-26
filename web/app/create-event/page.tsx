@@ -61,6 +61,13 @@ export default function Component() {
   const [food2Image, setFood2Image] = useState('');
   const [food3Image, setFood3Image] = useState('');
   const [bombImage, setBombImage] = useState('');
+  const [playerImage1, setPlayerImage1] = useState('');
+  const [playerImage2, setPlayerImage2] = useState('');
+  const [playerImage3, setPlayerImage3] = useState('');
+  const [playerImage4, setPlayerImage4] = useState('');
+  const [playerImage5, setPlayerImage5] = useState('');
+  const [playerImage6, setPlayerImage6] = useState('');
+
   const [fileCreated, setFileCreated] = useState(false);
 
   const {
@@ -75,7 +82,7 @@ export default function Component() {
       startDate: '',
       startTime: '',
       duration: 1,
-      game: '',
+      game: 'agario',
       tokenAddress: '',
       tokensPerSecond: '0',
       maxPlayers: '0',
@@ -222,6 +229,19 @@ export default function Component() {
         food2: food2Image,
         food3: food3Image,
         bomb: bombImage,
+      },
+      playerImages: {
+        playerImage1: 'https://res.cloudinary.com/brunoeleodoro/image/upload/v1720774464/noun.png',
+        playerImage2:
+          'https://res.cloudinary.com/brunoeleodoro/image/upload/v1720774464/noun_2.png',
+        playerImage3:
+          'https://res.cloudinary.com/brunoeleodoro/image/upload/v1720774464/noun_3.png',
+        playerImage4:
+          'https://res.cloudinary.com/brunoeleodoro/image/upload/v1720774464/noun_4.png',
+        playerImage5:
+          'https://res.cloudinary.com/brunoeleodoro/image/upload/v1720774464/noun_5.png',
+        playerImage6:
+          'https://res.cloudinary.com/brunoeleodoro/image/upload/v1720774464/noun_6.png',
       },
       backgroundColor: data.backgroundColor,
       settings: {
@@ -642,6 +662,174 @@ export default function Component() {
                 </label>
               </div>
             </div>
+            <h2 className="mb-4 text-lg font-bold">Player Images</h2>
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <label
+                  htmlFor="playerImage1"
+                  className="block text-sm font-medium text-muted-foreground"
+                >
+                  Player Image 1
+                </label>
+                <input
+                  type="file"
+                  id="playerImage1"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload(e, setPlayerImage1)}
+                  className="hidden"
+                />
+                <label htmlFor="playerImage1">
+                  <img
+                    src={
+                      playerImage1
+                        ? `data:image/png;base64,${playerImage1}`
+                        : 'placeholder-image-url'
+                    }
+                    width={100}
+                    height={100}
+                    alt="Player Image 1"
+                    className="cursor-pointer rounded-md"
+                  />
+                </label>
+              </div>
+              <div>
+                <label htmlFor="food2" className="block text-sm font-medium text-muted-foreground">
+                  Player Image 2
+                </label>
+                <input
+                  type="file"
+                  id="playerImage2"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload(e, setPlayerImage2)}
+                  className="hidden"
+                />
+                <label htmlFor="playerImage2">
+                  <img
+                    src={
+                      playerImage2
+                        ? `data:image/png;base64,${playerImage2}`
+                        : 'placeholder-image-url'
+                    }
+                    width={100}
+                    height={100}
+                    alt="Player Image 2"
+                    className="cursor-pointer rounded-md"
+                  />
+                </label>
+              </div>
+              <div>
+                <label
+                  htmlFor="playerImage3"
+                  className="block text-sm font-medium text-muted-foreground"
+                >
+                  Player Image 3
+                </label>
+                <input
+                  type="file"
+                  id="playerImage3"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload(e, setPlayerImage3)}
+                  className="hidden"
+                />
+                <label htmlFor="playerImage3">
+                  <img
+                    src={
+                      playerImage3
+                        ? `data:image/png;base64,${playerImage3}`
+                        : 'placeholder-image-url'
+                    }
+                    width={100}
+                    height={100}
+                    alt="Player Image 3"
+                    className="cursor-pointer rounded-md"
+                  />
+                </label>
+              </div>
+              <div>
+                <label
+                  htmlFor="playerImage4"
+                  className="block text-sm font-medium text-muted-foreground"
+                >
+                  Player Image 4
+                </label>
+                <input
+                  type="file"
+                  id="playerImage4"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload(e, setPlayerImage4)}
+                  className="hidden"
+                />
+                <label htmlFor="playerImage4">
+                  <img
+                    src={
+                      playerImage4
+                        ? `data:image/png;base64,${playerImage4}`
+                        : 'placeholder-image-url'
+                    }
+                    width={100}
+                    height={100}
+                    alt="Player Image 4"
+                    className="cursor-pointer rounded-md"
+                  />
+                </label>
+              </div>
+              <div>
+                <label
+                  htmlFor="playerImage5"
+                  className="block text-sm font-medium text-muted-foreground"
+                >
+                  Player Image 5
+                </label>
+                <input
+                  type="file"
+                  id="playerImage5"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload(e, setPlayerImage5)}
+                  className="hidden"
+                />
+                <label htmlFor="playerImage5">
+                  <img
+                    src={
+                      playerImage5
+                        ? `data:image/png;base64,${playerImage5}`
+                        : 'placeholder-image-url'
+                    }
+                    width={100}
+                    height={100}
+                    alt="Player Image 5"
+                    className="cursor-pointer rounded-md"
+                  />
+                </label>
+              </div>
+              <div>
+                <label
+                  htmlFor="playerImage6"
+                  className="block text-sm font-medium text-muted-foreground"
+                >
+                  Player Image 6
+                </label>
+                <input
+                  type="file"
+                  id="playerImage6"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload(e, setPlayerImage6)}
+                  className="hidden"
+                />
+                <label htmlFor="playerImage6">
+                  <img
+                    src={
+                      playerImage6
+                        ? `data:image/png;base64,${playerImage6}`
+                        : 'placeholder-image-url'
+                    }
+                    width={100}
+                    height={100}
+                    alt="Player Image 6"
+                    className="cursor-pointer rounded-md"
+                  />
+                </label>
+              </div>
+            </div>
             <div className="mt-4">
               <label
                 htmlFor="background"
@@ -650,12 +838,17 @@ export default function Component() {
                 Background Color
               </label>
               <div className="mt-1">
-                <input
-                  type="color"
-                  id="background"
-                  className="h-10 w-full cursor-pointer rounded-md"
-                  // value={backgroundColor}
-                  // onChange={(e) => setBackgroundColor(e.target.value)}
+                <Controller
+                  name="backgroundColor"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      type="color"
+                      id="background"
+                      className="h-10 w-full cursor-pointer rounded-md"
+                      {...field}
+                    />
+                  )}
                 />
               </div>
               <div className="mt-1" />
@@ -665,11 +858,13 @@ export default function Component() {
             </div>
           </div>
         </div>
-        <div className="flex justify-end">
-          <Button type="submit" className="rounded-md px-6 py-2">
-            Create Event
-          </Button>
-        </div>
+        {newGameContract && (
+          <div className="flex justify-end">
+            <Button type="submit" className="rounded-md px-6 py-2">
+              Create Event
+            </Button>
+          </div>
+        )}
         <div className="flex justify-end gap-4">
           {shouldApprove && (
             <Button
